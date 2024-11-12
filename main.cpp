@@ -4,6 +4,7 @@
 #include "motor.h"
 #include "pins.h"
 #include "sensors.h"
+#include "test_controller.h"
 
 void setup()
 {
@@ -19,5 +20,6 @@ void setup()
 void loop()
 {
 	handleControls();
-    delay(100);
+    handleCurrentTest();
+    delay(50);
 }

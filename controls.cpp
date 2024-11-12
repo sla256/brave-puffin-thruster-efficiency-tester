@@ -3,6 +3,7 @@
 #include "motor.h"
 #include "pins.h"
 #include "sensors.h"
+#include "test_controller.h"
 
 void handleSerialInputs();
 void handleBtInputs();
@@ -33,25 +34,39 @@ void handleBtInputs() {
 }
 
 void processControlInput(char input) {
-    switch (input)
-    {
+    unsigned long currentPowerW;
+
+    switch (input) {
         case 'a':
+            currentPowerW = getVoltageFromIna226() * getCurrentFromIna226() / 1000000;
             Serial.println(getVoltageFromIna226());
             Serial.println(getCurrentFromIna226());
+            Serial.println(currentPowerW);
 
             btPrintln(getVoltageFromIna226());
-            delay(50);
+            delay(100);
             btPrintln(getCurrentFromIna226());
+            delay(100);
+            btPrintln(currentPowerW);
             break;
+
+        case 'b':
+            beginNewTest();
+            break;
+
         case 's':
             stopMotor();
+            stopCurrentTest();
             break;
+            
         case 'g':
             setMotorThrottle(1);
             break;
+
         case 'u':
             incrementMotorThrottle(10);
             break;
+            
         case 'd':
             incrementMotorThrottle(-10);
             break;

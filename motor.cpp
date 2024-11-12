@@ -3,7 +3,7 @@
 #include "pins.h"
 
 const int motorStopPulseWidth = 800;    // must start at this level to initialize ESC properly
-const int motorMinPulseWidth = 1200;
+const int motorMinPulseWidth = 1205;
 const int motorMaxPulseWidth = 1600;
 
 Servo motorControl;
