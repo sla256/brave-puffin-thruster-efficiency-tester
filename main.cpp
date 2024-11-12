@@ -20,6 +20,6 @@ void setup()
 void loop()
 {
 	handleControls();
-    handleCurrentTest();
+    handleEfficiencyTest();
     delay(50);
 }

@@ -51,12 +51,12 @@ void processControlInput(char input) {
             break;
 
         case 'b':
-            beginNewTest();
+            beginNewEfficiencyTest();
             break;
 
         case 's':
             stopMotor();
-            stopCurrentTest();
+            stopEfficiencyTest();
             break;
             
         case 'g':
@@ -66,7 +66,7 @@ void processControlInput(char input) {
         case 'u':
             incrementMotorThrottle(10);
             break;
-            
+
         case 'd':
             incrementMotorThrottle(-10);
             break;

@@ -1,3 +1,3 @@
-void beginNewTest();
-void handleCurrentTest();
-void stopCurrentTest();
+void beginNewEfficiencyTest();
+void handleEfficiencyTest();
+void stopEfficiencyTest();

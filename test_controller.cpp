@@ -25,12 +25,12 @@ void progressToNextStep() {
     setMotorThrottle(currentTestStep);
 }
 
-void beginNewTest() {
+void beginNewEfficiencyTest() {
     currentTestStep = 0;
     progressToNextStep();
 }
 
-void handleCurrentTest() {
+void handleEfficiencyTest() {
     if (currentTestStep == 0) {
         stopMotor();
         return;
@@ -51,7 +51,7 @@ void handleCurrentTest() {
     }
 
     if (currentTestStep > 100) {
-        stopCurrentTest();
+        stopEfficiencyTest();
         return;
     }
 
@@ -62,7 +62,7 @@ void handleCurrentTest() {
     averagePowerValuesForAllTestSteps[currentTestStep - 1] = currentTestStepCumulativePowerValuesW / numberOfPowerMeasurementsInCurrentTestStep;
 }
 
-void stopCurrentTest() {
+void stopEfficiencyTest() {
     // TODO write results to an SD card
     currentTestStep = 0;
     stopMotor();
