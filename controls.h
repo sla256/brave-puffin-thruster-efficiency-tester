@@ -1,0 +1,2 @@
+void initControls();
+void handleControls();

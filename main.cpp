@@ -1,0 +1,23 @@
+#include <Arduino.h>
+#include "comm_bt.h"
+#include "controls.h"
+#include "motor.h"
+#include "pins.h"
+#include "sensors.h"
+
+void setup()
+{
+    Serial.begin(115200);
+    Serial.println("Starting...");
+
+    initMotor();
+    initBt();
+    initControls();
+	initSensors();
+}
+
+void loop()
+{
+	handleControls();
+    delay(100);
+}
