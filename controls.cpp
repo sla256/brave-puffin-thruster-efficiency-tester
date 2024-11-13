@@ -35,6 +35,7 @@ void handleBtInputs() {
 
 void processControlInput(char input) {
     unsigned long currentPowerW;
+    int force;
 
     switch (input) {
         case 'a':
@@ -52,6 +53,16 @@ void processControlInput(char input) {
 
         case 'b':
             beginNewEfficiencyTest();
+            break;
+
+        case 'c':
+            calibrateForceSensorHx711();
+            break;
+
+        case 'f':
+            force = getPullForce();
+            Serial.println(force);
+            btPrintln(force);
             break;
 
         case 's':

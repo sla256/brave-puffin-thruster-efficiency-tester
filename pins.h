@@ -6,6 +6,6 @@
 
 #define PIN_STATUS_LED 25
 
-#define PIN_U0TX 43
-#define PIN_U0RX 44
+#define PIN_HX711_DATA 32
+#define PIN_HX711_CLOCK 33
 
