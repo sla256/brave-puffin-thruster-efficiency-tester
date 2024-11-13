@@ -4,9 +4,11 @@
 #include "sensors.h"
 #include "test_controller.h"
 
-const int testStepDurationMs = 2*1000;
+const int testStepDurationMs = 3*1000;
 
-int currentTestStep = 0; // 1-100 during test
+int currentTestRun = 0; // to print for
+int currentTestStep = 0; // 1-100 during each test run
+int testStepToStopTestRunAt = 100;
 unsigned long currentTestStepStartTimeMs;
 
 float currentTestStepCumulativePowerValuesW; // all power values measured in the current test step, added up
@@ -27,7 +29,15 @@ void progressToNextStep() {
     setMotorThrottle(currentTestStep);
 }
 
-void beginNewEfficiencyTest() {
+void beginNewEfficiencyTest(int testStepToStopAt=100) {
+    currentTestRun++;
+    testStepToStopTestRunAt = testStepToStopAt;
+
+    Serial.print("Beginning test run #");
+    Serial.print(currentTestRun);
+    Serial.print(", stopping at ");
+    Serial.println(testStepToStopAt);
+
     currentTestStep = 0;
     progressToNextStep();
 }
@@ -52,7 +62,7 @@ void handleEfficiencyTest() {
         return;
     }
 
-    if (currentTestStep > 100) {
+    if (currentTestStep > testStepToStopTestRunAt) {
         stopEfficiencyTest();
         return;
     }
@@ -70,11 +80,13 @@ void handleEfficiencyTest() {
 }
 
 void stopEfficiencyTest() {
-    // TODO write results to an SD card
     currentTestStep = 0;
     stopMotor();
 
-    for(int i = 0; i < 100; i++) {
+    Serial.print("Finished test run #");
+    Serial.println(currentTestRun);
+
+    for(int i = 0; i < testStepToStopTestRunAt; i++) {
         Serial.print(averagePowerValuesForAllTestSteps[i], 1);
         Serial.print(", ");
         Serial.println(averageThrustForceValuesForAllTestSteps[i]);

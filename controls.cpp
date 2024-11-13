@@ -51,8 +51,12 @@ void processControlInput(char input) {
             btPrintln(currentPowerW);
             break;
 
+        case 'B':
+            beginNewEfficiencyTest(100);
+            break;
+
         case 'b':
-            beginNewEfficiencyTest();
+            beginNewEfficiencyTest(50);
             break;
 
         case 'c':
