@@ -17,19 +17,13 @@ void handleDebug() {
 void printDebugInfo() {
     int voltage = getVoltageFromIna226(); // mV
     int current = getCurrentFromIna226(); // mA
-    int currentPowerW =  voltage * current / 1000000;
+    int power =  voltage * current / 1000000; // W
     int force = getPullForce(); // g
 
-    Serial.print("V="); Serial.print(voltage);
-    Serial.print("mV; I="); Serial.print(current);
-    Serial.print("mA; P="); Serial.print(currentPowerW);
-    Serial.print("W; F="); Serial.print(force);
-    Serial.print("g"); Serial.println();
+    char buffer[50];
+    snprintf(buffer, sizeof(buffer), "V=%d mV, I=%d mA, P=%d W, F=%d g", 
+        voltage, current, power, force);
 
-    btPrintln("mV, mA, W, g");
-    btPrintln(voltage);
-    btPrintln(current);
-    btPrintln(currentPowerW);
-    btPrintln(force);
+    Serial.println(btPrintln(buffer));
 }
 
