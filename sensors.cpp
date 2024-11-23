@@ -10,6 +10,10 @@ HX711 forceSensor;
 int hx711CalibrationOffset = 145779;
 int hx711CalibrationScale = 103.414162;
 
+// mechanical advantage of a lever pushing on the force sensor
+// 2.0 means thruster could be product 1 kg of force and the sensor registering 2 kg
+const float rigLeverRatio = 3.6;
+
 void initSensors() {
   Wire.begin();
   scanI2cDevices();
@@ -73,5 +77,5 @@ void calibrateForceSensorHx711() {
 }
 
 int getPullForce() {
-  return forceSensor.get_units();
+  return forceSensor.get_units() / rigLeverRatio;
 }
