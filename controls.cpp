@@ -54,6 +54,7 @@ void processControlInput(char input) {
             break;
 
         case 's':
+            isInDebugMode = false;
             stopMotor();
             stopEfficiencyTest();
             break;
