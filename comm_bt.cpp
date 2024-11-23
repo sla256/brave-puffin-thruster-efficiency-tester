@@ -11,7 +11,7 @@ void turnBtOn();
 void initBt() {
   Serial.print("BT: ");
 
-  Serial.println(SerialBT.begin("bptet-esp32", false, false));
+  Serial.println(SerialBT.begin("bptet-esp32", false, true));
 
   turnBtOn();
 }
@@ -34,16 +34,20 @@ bool isBtConnected() {
   return SerialBT.connected();
 }
 
-void btPrintln(char *s) {
+char *btPrintln(char *s) {
   if (!isBtOn() ||  !isBtConnected()) {
-    return;
+    return s;
   }
+
   getBtSerial()->println(s);
+  return s;
 }
 
-void btPrintln(int i) {
+int btPrintln(int i) {
   if (!isBtOn()  ||  !isBtConnected()) {
-    return;
+    return i;
   }
+
   getBtSerial()->println(i);
+  return i;
 }
