@@ -5,6 +5,8 @@
 #include "sensors.h"
 #include "test_controller.h"
 
+bool isInDebugMode = false;
+
 void handleSerialInputs();
 void handleBtInputs();
 void processControlInput(char input);
@@ -34,21 +36,9 @@ void handleBtInputs() {
 }
 
 void processControlInput(char input) {
-    unsigned long currentPowerW;
-    int force;
-
     switch (input) {
         case 'a':
-            currentPowerW = getVoltageFromIna226() * getCurrentFromIna226() / 1000000;
-            Serial.println(getVoltageFromIna226());
-            Serial.println(getCurrentFromIna226());
-            Serial.println(currentPowerW);
-
-            btPrintln(getVoltageFromIna226());
-            delay(100);
-            btPrintln(getCurrentFromIna226());
-            delay(100);
-            btPrintln(currentPowerW);
+            isInDebugMode = !isInDebugMode;
             break;
 
         case 'B':
@@ -61,12 +51,6 @@ void processControlInput(char input) {
 
         case 'c':
             calibrateForceSensorHx711();
-            break;
-
-        case 'f':
-            force = getPullForce();
-            Serial.println(force);
-            btPrintln(force);
             break;
 
         case 's':
@@ -86,4 +70,8 @@ void processControlInput(char input) {
             incrementMotorThrottle(-10);
             break;
     }
+}
+
+bool getDebugModeState () {
+    return isInDebugMode;
 }

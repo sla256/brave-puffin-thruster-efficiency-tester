@@ -1,0 +1,2 @@
+void printDebugInfo();
+void handleDebug();
