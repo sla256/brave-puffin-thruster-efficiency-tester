@@ -1,3 +1,3 @@
 void beginNewEfficiencyTest(int testStepToStopAt);
-void handleEfficiencyTest();
+void handleTestInProgress();
 void stopEfficiencyTest();

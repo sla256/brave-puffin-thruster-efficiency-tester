@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "comm_bt.h"
+#include "sd_m.h"
 #include "motor.h"
 #include "sensors.h"
 #include "test_controller.h"
@@ -33,7 +34,7 @@ void beginNewEfficiencyTest(int testStepToStopAt=100) {
     currentTestRun++;
     testStepToStopTestRunAt = testStepToStopAt;
 
-    Serial.print("Beginning test run #");
+    Serial.print(btPrintln("Beginning test run #"));
     Serial.print(currentTestRun);
     Serial.print(", stopping at ");
     Serial.println(testStepToStopAt);
@@ -42,7 +43,7 @@ void beginNewEfficiencyTest(int testStepToStopAt=100) {
     progressToNextStep();
 }
 
-void handleEfficiencyTest() {
+void handleTestInProgress() {
     if (currentTestStep == 0) {
         stopMotor();
         return;
@@ -83,12 +84,17 @@ void stopEfficiencyTest() {
     currentTestStep = 0;
     stopMotor();
 
-    Serial.print("Finished test run #");
-    Serial.println(currentTestRun);
+    Serial.print(btPrintln("Finished test run #"));
+    Serial.println(btPrintln(currentTestRun));
+
+    char buffer[50];
+    char testResultsFileName[20];
+    snprintf(testResultsFileName, sizeof(testResultsFileName), "/r%d_%d.csv", currentTestRun, millis() / 1000);
+    writeToFileOnSdCard(testResultsFileName, "Power in watts, force in grams");
 
     for(int i = 0; i < testStepToStopTestRunAt; i++) {
-        Serial.print(averagePowerValuesForAllTestSteps[i], 1);
-        Serial.print(", ");
-        Serial.println(averageThrustForceValuesForAllTestSteps[i]);
+        snprintf(buffer, sizeof(buffer), "%.1f, %d", averagePowerValuesForAllTestSteps[i], averageThrustForceValuesForAllTestSteps[i]);
+        writeToFileOnSdCard(testResultsFileName, buffer);
+        Serial.println(btPrintln(buffer));
     }
 }
