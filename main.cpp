@@ -2,8 +2,10 @@
 #include "comm_bt.h"
 #include "controls.h"
 #include "debug.h"
+#include "eeprom_m.h"
 #include "motor.h"
 #include "pins.h"
+#include "sd_m.h"
 #include "sensors.h"
 #include "test_controller.h"
 
@@ -15,11 +17,15 @@ void setup() {
     initBt();
     initControls();
 	initSensors();
+    initSd();
+    initEeprom();
+
+    Serial.println("Ready");
 }
 
 void loop() {
 	handleControls();
-    handleEfficiencyTest();
+    handleTestInProgress();
     handleDebug();
     delay(50);
 }
