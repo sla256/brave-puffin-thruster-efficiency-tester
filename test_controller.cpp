@@ -1,13 +1,15 @@
 #include <Arduino.h>
 #include "comm_bt.h"
+#include "eeprom_m.h"
 #include "sd_m.h"
 #include "motor.h"
 #include "sensors.h"
 #include "test_controller.h"
 
 const int testStepDurationMs = 3*1000;
+char buffer2[50];
 
-int currentTestRun = 0; // to print for
+int16_t currentTestRun = 0; // to print for
 int currentTestStep = 0; // 1-100 during each test run
 int testStepToStopTestRunAt = 100;
 unsigned long currentTestStepStartTimeMs;
@@ -31,7 +33,9 @@ void progressToNextStep() {
 }
 
 void beginNewEfficiencyTest(int testStepToStopAt=100) {
-    currentTestRun++;
+    currentTestRun = readInt16FromEeprom(EEPROM_TEST_RUN_NUMBER_ADDR) + 1;
+    writeInt16ToEeprom(EEPROM_TEST_RUN_NUMBER_ADDR, currentTestRun);
+
     testStepToStopTestRunAt = testStepToStopAt;
 
     Serial.print(btPrintln("Beginning test run #"));
@@ -51,13 +55,11 @@ void handleTestInProgress() {
 
     if (millis() - currentTestStepStartTimeMs > testStepDurationMs) {
         // print latest values from the previous step
-        Serial.print(currentTestStep);
-        Serial.print(": ");
-        Serial.print(averagePowerValuesForAllTestSteps[currentTestStep - 1], 1);
-        Serial.print(", ");
-        Serial.println(averageThrustForceValuesForAllTestSteps[currentTestStep - 1]);
-
-        btPrintln(currentTestStep);
+        snprintf(buffer2, sizeof(buffer2), "%d: %.1f, %d", 
+            currentTestStep,
+            averagePowerValuesForAllTestSteps[currentTestStep - 1], 
+            averageThrustForceValuesForAllTestSteps[currentTestStep - 1]);
+        Serial.println(btPrintln(buffer2));
 
         progressToNextStep();
         return;
@@ -87,14 +89,13 @@ void stopEfficiencyTest() {
     Serial.print(btPrintln("Finished test run #"));
     Serial.println(btPrintln(currentTestRun));
 
-    char buffer[50];
     char testResultsFileName[20];
     snprintf(testResultsFileName, sizeof(testResultsFileName), "/r%d_%d.csv", currentTestRun, millis() / 1000);
     writeToFileOnSdCard(testResultsFileName, "Power in watts, force in grams");
 
     for(int i = 0; i < testStepToStopTestRunAt; i++) {
-        snprintf(buffer, sizeof(buffer), "%.1f, %d", averagePowerValuesForAllTestSteps[i], averageThrustForceValuesForAllTestSteps[i]);
-        writeToFileOnSdCard(testResultsFileName, buffer);
-        Serial.println(btPrintln(buffer));
+        snprintf(buffer2, sizeof(buffer2), "%.1f, %d", averagePowerValuesForAllTestSteps[i], averageThrustForceValuesForAllTestSteps[i]);
+        writeToFileOnSdCard(testResultsFileName, buffer2);
+        Serial.println(btPrintln(buffer2));
     }
 }

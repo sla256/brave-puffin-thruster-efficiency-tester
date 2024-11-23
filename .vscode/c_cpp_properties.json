@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Arduino",
-            "compilerPath": "~/Library/Arduino15/packages/esp32/tools/esp-x32/2302/bin/xtensa-esp32-elf-g++",
+            "compilerPath": "/Users/slavaasipenko/Library/Arduino15/packages/esp32/tools/esp-x32/2302/bin/xtensa-esp32-elf-g++",
             "compilerArgs": [
                 "-MMD",
                 "-w",
@@ -12,16 +12,29 @@
             ],
             "intelliSenseMode": "gcc-x64",
             "includePath": [
-                "~/Library/Arduino15/packages/esp32/hardware/esp32/3.0.7/cores/esp32/**",
-                "~/Library/Arduino15/packages/esp32/hardware/esp32/3.0.7/variants/heltec_wifi_kit_32",
-                "~/Documents/Arduino/libraries/**",
-                "~/Library/Arduino15/packages/esp32/hardware/esp32/3.0.7/libraries/**",
-                "~/Library/Arduino15/packages/esp32/tools/esp-x32/2302/xtensa-esp32-elf/**",
-                "~/Library/Arduino15/packages/esp32/tools/esp-x32/2302/lib/gcc/xtensa-esp32-elf/12.2.0/**",
-                "~/Library/Arduino15/packages/esp32/tools/esp32-arduino-libs/idf-release_v5.1-632e0c2a/esp32/**"
+                "/Users/slavaasipenko/brave-puffin-thruster-efficiency-tester",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/tools/esp32-arduino-libs/idf-release_v5.1-632e0c2a/esp32/qio_qspi/include",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/hardware/esp32/3.0.7/cores/esp32",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/hardware/esp32/3.0.7/variants/esp32",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/hardware/esp32/3.0.7/libraries/BluetoothSerial/src",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/hardware/esp32/3.0.7/libraries/EEPROM/src",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/hardware/esp32/3.0.7/libraries/SD/src",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/hardware/esp32/3.0.7/libraries/FS/src",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/hardware/esp32/3.0.7/libraries/SPI/src",
+                "/Users/slavaasipenko/Documents/Arduino/libraries/ESP32Servo/src",
+                "/Users/slavaasipenko/Documents/Arduino/libraries/HX711",
+                "/Users/slavaasipenko/Documents/Arduino/libraries/INA226",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/hardware/esp32/3.0.7/libraries/Wire/src",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/tools/esp-x32/2302/xtensa-esp32-elf/include/c++/12.2.0",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/tools/esp-x32/2302/xtensa-esp32-elf/include/c++/12.2.0/xtensa-esp32-elf",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/tools/esp-x32/2302/xtensa-esp32-elf/include/c++/12.2.0/backward",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/tools/esp-x32/2302/lib/gcc/xtensa-esp32-elf/12.2.0/include",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/tools/esp-x32/2302/lib/gcc/xtensa-esp32-elf/12.2.0/include-fixed",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/tools/esp-x32/2302/xtensa-esp32-elf/sys-include",
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/tools/esp-x32/2302/xtensa-esp32-elf/include"
             ],
             "forcedInclude": [
-                ""
+                "/Users/slavaasipenko/Library/Arduino15/packages/esp32/hardware/esp32/3.0.7/cores/esp32/Arduino.h"
             ],
             "cStandard": "c11",
             "cppStandard": "c++11",
@@ -34,15 +47,12 @@
                 "ARDUINO_VARIANT=\"esp32\"",
                 "ARDUINO_PARTITION_default",
                 "ARDUINO_HOST_OS=\"macosx\"",
-                "ARDUINO_FQBN=\"esp32:esp32:esp32:JTAGAdapter=default,PSRAM=disabled,FlashMode=qio,FlashSize=4M,LoopCore=1,EventsCore=1,USBMode=hwcdc,CDCOnBoot=default,MSCOnBoot=default,DFUOnBoot=default,UploadMode=default,PartitionScheme=default,CPUFreq=240,UploadSpeed=921600,DebugLevel=none,EraseFlash=none,ZigbeeMode=default\"",
+                "ARDUINO_FQBN=\"esp32:esp32:esp32:JTAGAdapter=default,PSRAM=disabled,PartitionScheme=default,CPUFreq=240,FlashMode=qio,FlashFreq=80,FlashSize=4M,UploadSpeed=921600,LoopCore=1,EventsCore=1,DebugLevel=none,EraseFlash=none,ZigbeeMode=default\"",
                 "ESP32=ESP32",
                 "CORE_DEBUG_LEVEL=0",
                 "ARDUINO_RUNNING_CORE=1",
                 "ARDUINO_EVENT_RUNNING_CORE=1",
-                "ARDUINO_USB_MODE=1",
                 "ARDUINO_USB_CDC_ON_BOOT=0",
-                "ARDUINO_USB_MSC_ON_BOOT=0",
-                "ARDUINO_USB_DFU_ON_BOOT=0",
                 "__DBL_MIN_EXP__=(-1021)",
                 "__cpp_attributes=200809L",
                 "__cpp_nontype_template_parameter_auto=201606L",
