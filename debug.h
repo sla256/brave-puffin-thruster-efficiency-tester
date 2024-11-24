@@ -1,2 +1,2 @@
-void printDebugInfo();
+void printSensorInfo();
 void handleDebug();

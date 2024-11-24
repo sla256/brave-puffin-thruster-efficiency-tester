@@ -10,11 +10,11 @@ void handleDebug() {
     loopRunCount++;
 
     if (getDebugModeState() && loopRunCount % 10 == 0) {
-        printDebugInfo();
+        printSensorInfo();
     }
 }
 
-void printDebugInfo() {
+void printSensorInfo() {
     int voltage = getVoltageFromIna226(); // mV
     int current = getCurrentFromIna226(); // mA
     int power =  voltage * current / 1000000; // W
@@ -24,6 +24,7 @@ void printDebugInfo() {
     snprintf(buffer, sizeof(buffer), "V=%d mV, I=%d mA, P=%d W, F=%d g", 
         voltage, current, power, force);
 
-    Serial.println(btPrintln(buffer));
+    Serial.println(buffer);
+    btPrintln(buffer);
 }
 
