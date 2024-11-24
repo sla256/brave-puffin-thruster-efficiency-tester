@@ -3,8 +3,8 @@
 #include "pins.h"
 
 const int motorStopPulseWidth = 800;    // must start at this level to initialize ESC properly
-const int motorMinPulseWidth = 1210;
-const int motorMaxPulseWidth = 1600;
+const int motorMinPulseWidth = 1820; // 1210;
+const int motorMaxPulseWidth = 2100; // 1600;
 
 Servo motorControl;
 
@@ -32,4 +32,8 @@ bool incrementMotorThrottle(int throttleLevelIncrement) {
 
     setMotorThrottle(currentMotorPulseWidth + throttleLevelIncrement);
     return true;
+}
+
+int getCurrentMotorPulseWidth() {
+    return currentMotorPulseWidth;
 }
