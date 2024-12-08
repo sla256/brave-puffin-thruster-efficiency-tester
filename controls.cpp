@@ -15,27 +15,31 @@ void initControls() {
     pinMode(PIN_STATUS_LED, OUTPUT);
 }
 
-void handleControls() {
+void handleControls() {    
     handleSerialInputs();
     handleBtInputs();
+
+    digitalWrite(PIN_STATUS_LED, isInDebugMode ? HIGH : LOW);
 }
 
 void handleSerialInputs() {
+    Serial.flush();
     if (Serial.available() <= 0) return;
     
-    digitalWrite(PIN_STATUS_LED, HIGH);
     processControlInput((char) Serial.read());
-    digitalWrite(PIN_STATUS_LED, LOW);
 }
 
 void handleBtInputs() {
     if (!isBtOn()  ||  getBtSerial() == NULL  ||  !isBtConnected()) return;
     if (getBtSerial()->available() <= 0) return;
 
+    getBtSerial()->flush();
     processControlInput((char) getBtSerial()->read());
 }
 
 void processControlInput(char input) {
+    btPrintln(input);
+
     switch (input) {
         case 'a':
             isInDebugMode = !isInDebugMode;
@@ -61,14 +65,17 @@ void processControlInput(char input) {
             
         case 'g':
             setMotorThrottle(1);
+            Serial.println(btPrintln(getCurrentMotorPulseWidth()));
             break;
 
         case 'u':
-            incrementMotorThrottle(10);
+            incrementMotorThrottle(1);
+            Serial.println(btPrintln(getCurrentMotorPulseWidth()));
             break;
 
         case 'd':
-            incrementMotorThrottle(-10);
+            incrementMotorThrottle(-1);
+            Serial.println(btPrintln(getCurrentMotorPulseWidth()));
             break;
     }
 }

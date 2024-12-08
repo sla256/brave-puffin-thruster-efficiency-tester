@@ -10,8 +10,7 @@ void turnBtOn();
 
 void initBt() {
   Serial.print("BT: ");
-
-  Serial.println(SerialBT.begin("bptet-esp32", false, true));
+  Serial.println(SerialBT.begin("bptet-esp32", false, false) ? "OK" : "FAIL");
 
   turnBtOn();
 }
