@@ -10,9 +10,9 @@ bool sdInitStatus;
 char buffer[50];
 
 void initSd() {
-  mountCard();
   Serial.print("SD card: ");
-  Serial.println(sdInitStatus);
+  mountCard();
+  Serial.println(sdInitStatus ? "OK" : "FAIL");
 
 //   writeInt16ToEeprom(EEPROM_LOG_FILE_NUMBER_ADDR, 0);
   unmountCard();

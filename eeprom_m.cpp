@@ -2,7 +2,7 @@
 
 void initEeprom() {
   Serial.print("EEPROM: ");
-  Serial.println(EEPROM.begin(256));
+  Serial.println(EEPROM.begin(256) ? "OK" : "FAIL");
 }
 
 int16_t readInt16FromEeprom(int addr) {

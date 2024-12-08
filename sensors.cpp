@@ -19,13 +19,13 @@ void initSensors() {
   scanI2cDevices();
 
   Serial.print("INA226_1: ");
-  Serial.println(ina226_1.begin());
+  Serial.println(ina226_1.begin() ? "OK" : "FAIL");
   ina226_1.setMaxCurrentShunt(20, 0.002);
 
   Serial.print("HX711: ");
   forceSensor.begin(PIN_HX711_DATA, PIN_HX711_CLOCK);
   forceSensor.set_offset(hx711CalibrationOffset);
-  Serial.println(forceSensor.set_scale(hx711CalibrationScale));
+  Serial.println(forceSensor.set_scale(hx711CalibrationScale) ? "OK" : "FAIL");
   forceSensor.tare();
 }
 
