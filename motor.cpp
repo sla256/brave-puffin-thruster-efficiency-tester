@@ -1,7 +1,16 @@
+#include "debug.h"
 #include <ESP32Servo.h>
 #include "motor.h"
 #include "pins.h"
 
+// 40A ESC
+// Inits at 1500
+// Backward 1443 (min) to 1150 (max)
+// Forward 1505 (min) to 1920 (max)
+
+// 30A ESC
+// Inits at 800
+// Forward 1190 (min) to 1890 (max)
 const int motorStopPulseWidth = 800;    // must start at this level to initialize ESC properly
 const int motorMinPulseWidth = 1190;
 const int motorMaxPulseWidth = 1890;
