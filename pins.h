@@ -7,6 +7,9 @@ SCK to GPIO 18
 5V for power; should have built-in logic level convertors to 3V
 */
 
+// pulldown default RX0 pin (GPIO03) via 1k - 10k resistor
+// otherwise RX ping floats and picks up noise when UART is not connected via USB
+
 #define PIN_SD_CS 5
 
 #define PIN_MOTOR_PWM 14
