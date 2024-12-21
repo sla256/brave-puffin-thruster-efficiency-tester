@@ -15,6 +15,8 @@ int hx711CalibrationScale = 103.414162;
 const float rigLeverRatio = 3.6;
 
 void initSensors() {
+  // pinMode(RX, INPUT);
+
   Wire.begin();
   scanI2cDevices();
 

@@ -23,7 +23,6 @@ void handleControls() {
 }
 
 void handleSerialInputs() {
-    Serial.flush();
     if (Serial.available() <= 0) return;
     
     processControlInput((char) Serial.read());
@@ -33,7 +32,6 @@ void handleBtInputs() {
     if (!isBtOn()  ||  getBtSerial() == NULL  ||  !isBtConnected()) return;
     if (getBtSerial()->available() <= 0) return;
 
-    getBtSerial()->flush();
     processControlInput((char) getBtSerial()->read());
 }
 
